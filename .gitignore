@@ -1,0 +1,5 @@
+/portfolio
+/app
+*.exe
+*.log
+.DS_Store
