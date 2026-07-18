@@ -1,0 +1,113 @@
+{{define "content"}}
+
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__copy">
+      <p class="eyebrow">// {{.Location}}</p>
+      <h1 class="hero__title">
+        {{.Name}}<br>
+        <span class="hero__title-sub">Hey there</span>
+      </h1>
+      <p class="hero__blurb">{{.Blurb}}</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#builds">see the builds</a>
+        <a class="btn btn--ghost" href="#contact">say hello</a>
+      </div>
+      <dl class="hero__stats">
+        <div><dt>repos</dt><dd>{{.GitHubStats.Repos}}</dd></div>
+        <div><dt>stars</dt><dd>{{.GitHubStats.Stars}}</dd></div>
+        <div><dt>followers</dt><dd>{{.GitHubStats.Followers}}</dd></div>
+      </dl>
+    </div>
+
+    <div class="hero__badge-stage">
+      <div class="lanyard" id="lanyard">
+        <div class="lanyard__strap" aria-hidden="true">
+          <span class="lanyard__stitch"></span>
+        </div>
+        <div class="badge" id="badge" tabindex="0" aria-label="Drag to swing {{.Name}}'s ID badge">
+          <div class="badge__clip"><span></span></div>
+          <div class="badge__card">
+            <div class="badge__header">
+              <span class="badge__org">MUTHONI&nbsp;SYSTEMS</span>
+              <span class="badge__chip"></span>
+            </div>
+            <div class="badge__photo">
+              <img src="{{.PhotoURL}}" alt="{{.Name}}" onerror="this.closest('.badge__photo').classList.add('badge__photo--empty')">
+            </div>
+            <p class="badge__name">{{.Name}}</p>
+            <p class="badge__role">{{.Tagline}}</p>
+            <div class="badge__barcode" aria-hidden="true"></div>
+            <p class="badge__id">ID // NBO-2026-{{.Handle}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="section-inner about__grid">
+    <div class="section-head">
+      <p class="eyebrow">// about</p>
+      <h2>What I do.</h2>
+    </div>
+    <div class="about__panel">
+      <p>I build secure and reliable systems that scales and survive using zero bloat code.I'm currently Based in {{.Location}}.</p>
+      <p>Currently deep in Go and Cloud Infra, with detours into MLOps whenever a model needs a real home to live in.</p>
+      <ul class="about__facts">
+        <li><span>focus</span>Backend Systems · Cloud Infra · MLOps</li>
+        <li><span>languages</span>Go, Python, Java, Bash</li>
+        <li><span>stacks</span>Fiber, FastAPI, Django</li>
+        <li><span>infra</span>AWS, Docker, Kubernetes, IaC, Linux</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="stack" id="stack">
+  <div class="section-inner">
+    <div class="section-head">
+      <p class="eyebrow">// stack</p>
+      <h2>Primary Stack: Stack is not a weapon I can adapt to any stack.</h2>
+    </div>
+    <div class="stack__grid">
+      {{$skills := .Skills}}
+      {{range $group := .SkillGroups}}
+      <div class="stack__panel">
+        <p class="stack__panel-title">{{$group}}</p>
+        <ul class="chip-list">
+          {{range $skills}}
+            {{if eq .Group $group}}<li class="chip">{{.Name}}</li>{{end}}
+          {{end}}
+        </ul>
+      </div>
+      {{end}}
+    </div>
+  </div>
+</section>
+
+<section class="builds" id="builds">
+  <div class="section-inner">
+    <div class="section-head">
+      <p class="eyebrow">// builds</p>
+      <h2>Recent shipped work.</h2>
+      <a class="section-head__link" href="https://github.com/jimmymuthoni?tab=repositories" target="_blank" rel="noopener">all repositories ↗</a>
+    </div>
+    <div class="builds__grid">
+      {{range .Projects}}
+      <a class="project-card{{if .Featured}} project-card--featured{{end}}" href="{{.URL}}" target="_blank" rel="noopener">
+        <div class="project-card__top">
+          <span class="project-card__tag">{{.Tag}}</span>
+          <span class="project-card__stats">★ {{.Stars}}{{if .Forks}} · ⑂ {{.Forks}}{{end}}</span>
+        </div>
+        <h3 class="project-card__name">{{.Name}}</h3>
+        <p class="project-card__desc">{{.Description}}</p>
+        <span class="project-card__go">view repo ↗</span>
+      </a>
+      {{end}}
+    </div>
+  </div>
+</section>
+
+{{end}}

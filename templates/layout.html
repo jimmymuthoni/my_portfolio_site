@@ -1,0 +1,67 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{.Name}} — {{.Tagline}}</title>
+<meta name="description" content="{{.Blurb}}">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="clip-rail" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="wordmark" href="#top">
+      <span class="wordmark__dot"></span>{{.Handle}}<span class="wordmark__slash">/</span>muthoni
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#about">about</a>
+      <a href="#stack">stack</a>
+      <a href="#builds">builds</a>
+      <a href="#contact">contact</a>
+      <a class="nav__resume" href="{{.ResumeURL}}" target="_blank" rel="noopener">résumé ↗</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+{{template "content" .}}
+</main>
+
+<footer class="footer" id="contact">
+  <div class="footer__inner">
+    <div class="footer__lead">
+      <p class="eyebrow">// get in touch</p>
+      <h2>Let's ship<br>something.</h2>
+    </div>
+    <ul class="footer__links">
+      {{range .Socials}}
+      <li>
+        <a href="{{.URL}}" target="_blank" rel="noopener">
+          <span class="footer__label">{{.Label}}</span>
+          <span class="footer__value">{{.Value}}</span>
+        </a>
+      </li>
+      {{end}}
+    </ul>
+  </div>
+  <div class="footer__bar">
+    <span>© {{.Year}} {{.Name}}. Built with Go &amp; html/template.</span>
+    <span class="footer__status"><i class="dot dot--live" aria-hidden="true"></i>status: shipping</span>
+  </div>
+</footer>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>
+{{end}}
